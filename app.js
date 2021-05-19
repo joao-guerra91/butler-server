@@ -17,7 +17,7 @@ require('./configs/passport')
 
 
 mongoose
-  .connect('mongodb://localhost/final-project-server', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -73,10 +73,13 @@ app.use(cors({
 const index = require('./routes/index');
 app.use('/', index);
 
-const projects = require('./routes/project-routes');
-app.use('/api', projects);
+const posts = require('./routes/post-routes');
+app.use('/api', posts);
 
 const auth = require('./routes/auth-routes');
 app.use('/api', auth);
+
+const users = require('./routes/user-routes');
+app.use('/api', users);
 
 module.exports = app;

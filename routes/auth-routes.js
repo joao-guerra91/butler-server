@@ -6,7 +6,7 @@ const passport = require("passport");
 
 //Signup
 router.post("/signup", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password,  profilePicture, coverPicture, followers, followings, description, city } = req.body;
   //Checking for username and password being filled out
   if (username === "" || password === "") {
     res.status(500).json("Indicate username and password");
@@ -44,6 +44,12 @@ router.post("/signup", async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      profilePicture,
+      coverPicture,
+      followers,
+      followings,
+      description,
+      city
     });
     res.json(user);
   } catch (e) {
