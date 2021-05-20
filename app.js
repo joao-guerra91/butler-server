@@ -52,7 +52,7 @@ app.use(session({
   },
   rolling: true // session gets refreshed with interactions
 
-}))
+})) 
 
 
 //Initialize passport
