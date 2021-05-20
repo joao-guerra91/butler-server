@@ -49,6 +49,7 @@ router.delete('/users/:id', async (req, res) => {
     res.status(500).json(`error occured ${e}`)
   }
 })
+
 // Get User by id
 router.get("/users/:id", async (req, res) => {
   try {
@@ -59,36 +60,21 @@ router.get("/users/:id", async (req, res) => {
   }
 })
 
-// fetch User page by id
-router.get("/users", async (req, res) => {
-  const userId = req.query.user._id;
-  const username = reqQuery.user.username;
-  try {
-    const users = userId ? await User.findById(userId) : await User.findOne({username: username});
-    res.status(200).json(users);
-  } catch (e) {
-    res.status(500).json(`error occured ${e}`)
-  }
-})
 
 
 // Update User
 router.put("/users/:id", async (req, res) => {
   try {
-    const { username, email, password, profilePicture, coverPicture, followers, followings, description, city} = req.body;
+    const { username, profilePicture, coverPicture, description, city} = req.body;
     await User.findByIdAndUpdate(req.params.id, {
       username,
-      email,
-      password,
       profilePicture,
       coverPicture,
-      followers,
-      followings,
       description,
       city,
       });
     res.status(200).json(`post with id ${req.params.id} deleted`)
-  } catch {
+  } catch (e) {
     res.status(500).json(`error occured ${e}`)
   }
 })

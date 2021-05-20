@@ -38,6 +38,11 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  service: {
+    type: String,
+    default: "",
+  },
+
 },
 {timestamps:true}
 );
