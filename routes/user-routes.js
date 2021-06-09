@@ -86,7 +86,7 @@ router.put("/user/:id/follow", async (req, res) => {
     const userToFollow = await User.findById(req.params.id);
     const currentUser = req.user;
     const alreadyFollowing = currentUser.followings.some((user) => {
-      return user._id.toString() === userToFollow._id.toString();
+      return user._id.toString() === userToFollow._id.toString().populate("user");
     })
   
     if(!alreadyFollowing) {
